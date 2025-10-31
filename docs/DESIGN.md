@@ -61,58 +61,85 @@
 
 ---
 
-## 💡 **4. Core Features (MVP)**
+## 💡 **4. Core Features**
 
-### **4.1 Listener Features**
+### **MVP Philosophy: Free Music First** 🎯
 
-| Feature                     | Description                                                      |
-| --------------------------- | ---------------------------------------------------------------- |
-| **Free streaming (global)** | Anyone worldwide can stream free tracks without login.           |
-| **Buy-to-own (UK/EU)**      | UK/EU users can buy paid tracks/albums and download DRM-free MP3s. |
-| **Offline library**         | Local MP3s + purchased tracks stored in device library.          |
-| **Search & browse**         | Genre, artist, and mood filtering.                               |
-| **Playlists**               | User-created playlists (local only at launch).                   |
-| **Free/Paid toggle**        | Quick switch to explore free or premium tracks.                  |
-| **Tip artist (UK/EU)**      | Optional "Tip Artist" button via TrueLayer Open Banking.         |
+**v1.0 MVP focuses on building an excellent FREE music platform:**
 
-### **4.2 Artist Features**
+* Prove that Buddy's UX is better than SoundCloud
+* Build audience of artists and listeners
+* Validate product-market fit before adding payment complexity
+* Launch faster with fewer moving parts
 
-| Feature                     | Description                                                      |
-| --------------------------- | ---------------------------------------------------------------- |
-| **Upload (global)**         | Any artist worldwide can upload free tracks.                     |
-| **Paid tracks (UK/EU)**     | UK/EU artists can set prices (£0.10-50) on tracks/albums.        |
-| **Artist pages**            | Banner, bio, track list, social links (Instagram, website).      |
-| **Dashboard**               | Real-time earnings, stream counts, sales analytics.              |
-| **Payouts (UK/EU)**         | TrueLayer Open Banking payouts (90% revenue share, £10 minimum). |
+**Payments come in v1.1** (after MVP validation, weeks 12-16)
+
+### **4.1 Listener Features (v1.0 MVP)**
+
+| Feature                     | Description                                                      | Version |
+| --------------------------- | ---------------------------------------------------------------- | ------- |
+| **Free streaming (global)** | Anyone worldwide can stream free tracks without login.           | v1.0 ✅ |
+| **Search & browse**         | Genre, artist, and mood filtering.                               | v1.0 ✅ |
+| **Playlists**               | User-created playlists (cloud-synced for logged-in users).       | v1.0 ✅ |
+| **Offline library**         | Local MP3s + future purchased tracks stored in device library.   | v1.0 ✅ |
+| **Buy-to-own (UK/EU)**      | UK/EU users can buy paid tracks/albums and download DRM-free MP3s. | v1.1 💳 |
+| **Tip artist (UK/EU)**      | Optional "Tip Artist" button via TrueLayer Open Banking.         | v1.1 💳 |
+
+### **4.2 Artist Features (v1.0 MVP)**
+
+| Feature                     | Description                                                      | Version |
+| --------------------------- | ---------------------------------------------------------------- | ------- |
+| **Upload (global)**         | Any artist worldwide can upload free tracks.                     | v1.0 ✅ |
+| **Artist pages**            | Banner, bio, track list, social links (Instagram, website).      | v1.0 ✅ |
+| **Dashboard**               | Stream counts, follower stats, track analytics.                  | v1.0 ✅ |
+| **Paid tracks (UK/EU)**     | UK/EU artists can set prices (£0.10-50) on tracks/albums.        | v1.1 💳 |
+| **Payouts (UK/EU)**         | TrueLayer Open Banking payouts (90% revenue share, £10 minimum). | v1.1 💳 |
 
 ### **4.3 Platform Features**
 
-| Feature                      | Description                                                      |
-| ---------------------------- | ---------------------------------------------------------------- |
-| **Buy Me a Coffee**          | Optional donation for Buddy development.                         |
-| **Geographic detection**     | Automatic feature gating based on user region.                   |
-| **Open-source transparency** | GitHub repository with public development.                       |
+| Feature                      | Description                                                      | Version |
+| ---------------------------- | ---------------------------------------------------------------- | ------- |
+| **Open-source transparency** | GitHub repository with public development.                       | v1.0 ✅ |
+| **Firebase backend**         | Serverless, auto-scaling infrastructure.                         | v1.0 ✅ |
+| **PWA support**              | Install to home screen, offline access on web.                   | v1.0 ✅ |
+| **Buy Me a Coffee**          | Optional donation for Buddy development.                         | v1.1 💳 |
+| **Geographic detection**     | Automatic feature gating based on user region (for payments).    | v1.1 💳 |
 
 ---
 
 ## 🌍 **4.4 Geographic Availability**
 
-### **Global Features (Available Worldwide)**
+### **v1.0 MVP: Global Free Music** 🌍
+
+**All features available worldwide (no geographic restrictions):**
 
 * ✅ Stream free tracks
 * ✅ Upload free tracks
-* ✅ Create playlists with free tracks
+* ✅ Create playlists
 * ✅ Follow artists
 * ✅ Browse and search
+* ✅ Download app on web or Android
 
-### **UK/EU Only Features (Launch Phase)**
+**Why global from day 1:**
+* Build international audience immediately
+* No payment complexity in MVP
+* Prove product value globally before monetization
+
+### **v1.1: UK/EU Payment Features** 💳
+
+**UK/EU Only (when payments launch):**
 
 * 💳 Purchase paid tracks/albums
 * 💳 Upload paid tracks (set prices)
-* 💳 Receive artist payouts
+* 💳 Receive artist payouts via TrueLayer
 * 💳 Tip artists
 
-### **Future Expansion (Phase 2)**
+**Why UK/EU first for payments:**
+* TrueLayer Open Banking available (1% fees)
+* Regulatory compliance (PSD2)
+* Lower transaction costs than alternatives
+
+### **v2.0+: International Payment Expansion** 🌎
 
 * 🌎 Research and implement low-cost payment solutions for international markets
 * 🌎 Explore alternatives: Wise, Revolut Business, regional Open Banking systems
@@ -120,27 +147,36 @@
 
 *See [BUSINESS_PLAN.md](./BUSINESS_PLAN.md) for detailed payment strategy and international expansion plans.*
 
-### **User Experience by Region**
+### **User Experience by Version**
 
-**Global Artist (e.g., US-based):**
+**v1.0 MVP (All Users, Global):**
+
+* ✅ Stream unlimited free tracks
+* ✅ Upload free tracks (artists)
+* ✅ Create playlists
+* ✅ Follow artists
+* ✅ Browse and search
+* 📢 See: "Paid features coming in v1.1!"
+
+**v1.1 Global Artist (e.g., US-based):**
 
 * ✅ Can upload unlimited free tracks
-* ❌ Cannot set prices (yet)
+* ❌ Cannot set prices yet
 * 📢 Sees: "Paid uploads coming soon for US artists!"
 
-**Global Listener (e.g., Australian):**
+**v1.1 Global Listener (e.g., Australian):**
 
 * ✅ Can stream all free tracks
 * ❌ Cannot purchase paid tracks
 * 📢 Sees: "Purchases available for UK/EU users. Coming globally soon!"
 
-**UK/EU Artist:**
+**v1.1 UK/EU Artist:**
 
 * ✅ Can upload free tracks
 * ✅ Can upload paid tracks (£0.10-50)
 * ✅ Receives 90% of sales via TrueLayer
 
-**UK/EU Listener:**
+**v1.1 UK/EU Listener:**
 
 * ✅ Can stream free tracks
 * ✅ Can purchase tracks via bank transfer
@@ -463,46 +499,83 @@ if (connectivity == ConnectivityResult.none) {
 
 ## 🌍 **7. Product Roadmap**
 
-### **Phase 1: MVP (v1.0) - UK/EU Launch**
+### **Phase 1: MVP (v1.0) - Free Music Platform**
 
-**Timeline:** Months 1-6
+**Timeline:** Weeks 1-9 (2 months)
 
 **Platforms:** Chrome (Web) + Android
 
+**Focus:** Build excellent FREE music platform first
+
 **Key Features:**
 
-* ✅ Free global streaming
-* ✅ UK/EU paid track purchases via TrueLayer
-* ✅ Artist uploads (global free, UK/EU paid)
+* ✅ Free global streaming (no login required)
+* ✅ Artist uploads (global, all tracks free)
 * ✅ Basic search and browse (genre filters)
 * ✅ Artist pages with bio and links
-* ✅ Offline library for purchased tracks (Android + PWA)
+* ✅ User playlists (cloud-synced)
+* ✅ Offline library (Android + PWA)
 * ✅ Simple, clean UI with Arty mascot
-* ✅ Buy Me a Coffee integration
-* ✅ Geographic feature gating
-* ✅ Progressive Web App (PWA) support for offline web access
+* ✅ Follow artists
+* ✅ Artist dashboard (streams, followers)
+* ✅ Progressive Web App (PWA) support
+
+**Why Free Music First:**
+* Prove UX is better than SoundCloud
+* Build audience before monetization
+* Launch faster (no payment complexity)
+* Validate product-market fit
 
 **Why Web + Android:**
 * Instant deployment (no App Store approval)
 * Maximum reach across all desktop operating systems
 * Single codebase for both platforms
 
-### **Phase 1.5: Apple Ecosystem (v1.1)**
+**Success Metrics (Month 1):**
+* 20 artists with uploads
+* 100 users
+* 500 streams
+* Positive feedback
+
+### **Phase 1.1: Payments & Monetization**
+
+**Timeline:** Weeks 12-16 (Months 3-4)
+
+**Platforms:** Chrome (Web) + Android (same as v1.0)
+
+**Focus:** Add TrueLayer payment features (UK/EU only)
+
+**New Features:**
+
+* 💳 UK/EU paid track purchases via TrueLayer
+* 💳 Artist price setting (£0.10-50) for UK/EU artists
+* 💳 Purchase and download DRM-free MP3s
+* 💳 Artist payouts (90% revenue share, £10 minimum)
+* 💳 Artist tips via TrueLayer
+* 💳 Buy Me a Coffee integration for platform donations
+* 💳 Geographic feature gating (detect UK/EU users)
+* 📊 Enhanced analytics (sales, earnings)
+
+**Trigger for v1.1:**
+* v1.0 has 50+ artists and 500+ users
+* Positive user feedback on free platform
+* Artists requesting monetization features
+
+### **Phase 1.5: Apple Ecosystem**
 
 **Timeline:** Months 6-9
 
 **Platforms:** iOS/iPad + macOS
+
+**Focus:** Expand to Apple devices after payment validation
 
 **Key Features:**
 
 * iOS/iPad native app
 * macOS native app
 * Apple-specific optimizations (Handoff, Continuity, Widgets)
-* Follow artists
-* User-created playlists (shareable, iCloud sync)
+* iCloud playlist sync
 * FLAC/WAV support for audiophiles
-* Artist tips via TrueLayer
-* Enhanced artist analytics
 * Bug fixes and performance improvements
 
 ### **Phase 2: International Research**
@@ -798,34 +871,84 @@ if (connectivity == ConnectivityResult.none) {
 
 ## 📋 **11. Implementation Priorities**
 
-### **Must-Have for v1.0 (UK/EU Launch)**
+### **Must-Have for v1.0 MVP (Free Music Platform - Weeks 1-9)**
 
-* ✅ Free streaming (global)
-* ✅ Track uploads with free/paid toggle
-* ✅ TrueLayer payment integration (UK/EU purchases)
-* ✅ TrueLayer payouts (UK/EU artists, £10 minimum)
-* ✅ Basic search and browse by genre
-* ✅ Artist pages with bio and track lists
-* ✅ Offline library for purchased tracks
+**Authentication & Users:**
+* ✅ Firebase Auth (email/password + continue as guest)
+* ✅ User profiles with artist toggle
+* ✅ Artist profiles (bio, banner, social links)
+
+**Music Streaming:**
+* ✅ Free streaming (global, no login required)
+* ✅ Audio player with playback controls
+* ✅ Mini-player (sticky bottom bar)
+* ✅ Background audio support
+
+**Artist Features:**
+* ✅ Track uploads (audio + artwork + metadata)
+* ✅ All tracks free (no pricing option in v1.0)
+* ✅ Artist pages with track lists
+* ✅ Basic artist dashboard (streams, followers)
+
+**Discovery:**
+* ✅ Basic search (by title/artist)
+* ✅ Browse by genre
+* ✅ Home feed (new releases, trending)
+* ✅ Artist profiles
+
+**Playlists & Library:**
+* ✅ User-created playlists (cloud-synced)
+* ✅ Follow artists
+* ✅ Offline mode (PWA)
+
+**UI/UX:**
 * ✅ Simple, clean UI with Arty mascot elements
-* ✅ Buy Me a Coffee integration
-* ✅ Geographic detection and feature gating
+* ✅ Loading states, error messages
+* ✅ Responsive design (web + mobile)
 
-### **Nice-to-Have for v1.5**
+**Total: ~8 weeks of development**
 
-* Follow artists
-* User playlists (shareable)
-* FLAC/WAV support
+### **Must-Have for v1.1 (Payments - Weeks 12-16)**
+
+**Payment Infrastructure:**
+* 💳 TrueLayer integration (Firebase Functions)
+* 💳 UK/EU geographic detection
+* 💳 Track pricing option for UK/EU artists (£0.10-50)
+
+**Purchase Flow:**
+* 💳 Buy button for UK/EU listeners
+* 💳 TrueLayer bank authorization
+* 💳 Download purchased MP3s
+* 💳 Purchase history
+
+**Artist Monetization:**
+* 💳 Earnings dashboard
+* 💳 TrueLayer payouts (£10 minimum, 90% share)
+* 💳 Sales analytics
+
+**Platform:**
+* 💳 Buy Me a Coffee integration
+* 💳 Enhanced analytics (revenue, geography)
+
+**Total: ~4 weeks of development** (after v1.0 validation)
+
+### **Nice-to-Have for v1.5 (Apple Ecosystem)**
+
+* iOS/iPad native app
+* macOS native app
+* Apple-specific features (Handoff, Widgets)
+* FLAC/WAV support for audiophiles
 * Artist tips
-* Enhanced analytics
+* Public playlists
 
 ### **Future (v2.0+)**
 
-* International payment solutions
-* Physical merch integration
+* International payment solutions (Wise, Revolut, regional Open Banking)
+* Physical merch integration (CD/vinyl)
 * Algorithmic recommendations
 * Artist verification badges
-* Public playlists and social features
+* Live streaming events
+* API for third-party integrations
 
 ---
 
@@ -871,3 +994,4 @@ if (connectivity == ConnectivityResult.none) {
 * v2.0 (Split into Design + Business Plan) - 31 October 2025
 * v2.1 (Added Technical Implementation Details) - 31 October 2025
 * v2.2 (Platform Strategy: Chrome + Android v1.0, iOS/macOS v1.1) - 31 October 2025
+* v3.0 (MVP Refocus: Free Music First, Payments in v1.1) - 31 October 2025
