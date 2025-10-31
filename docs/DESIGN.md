@@ -1,7 +1,7 @@
 # 🎧 **Buddy – Design Document**
 
 **Author:** Tyr Bujac
-**Platforms:** Android, macOS
+**Platforms:** Chrome (Web), Android | iOS/iPad, macOS (v1.1)
 **Status:** Concept & design phase (pre-MVP)
 **Date:** 31 October 2025
 **Related Documents:** [BUSINESS_PLAN.md](./BUSINESS_PLAN.md)
@@ -38,11 +38,26 @@
 
 ## 📱 **3. Target Platforms**
 
-| Platform    | Framework             | Notes                                                             |
-| ----------- | --------------------- | ----------------------------------------------------------------- |
-| **Android** | Flutter               | Primary launch platform. Full media playback and upload features. |
-| **macOS**   | Flutter (macOS build) | Desktop experience for creators and general listeners.            |
-| **Future**  | iOS, Web              | Phase 2 rollout. Flutter base ensures easy expansion.             |
+| Platform    | Framework             | Version | Notes                                                             |
+| ----------- | --------------------- | ------- | ----------------------------------------------------------------- |
+| **Chrome (Web)** | Flutter Web      | v1.0    | Instant access without app store approval. Desktop/mobile browser support. |
+| **Android** | Flutter               | v1.0    | Primary mobile platform. Full media playback and upload features. |
+| **iOS/iPad** | Flutter iOS          | v1.1    | App Store launch after MVP validation.                            |
+| **macOS**   | Flutter (macOS build) | v1.1    | Native desktop app for power users and creators.                  |
+
+**Why Web + Android First:**
+
+* **No approval gates:** Chrome launch is instant (no App Store review)
+* **Broader reach:** Web works on any desktop/laptop (Windows, Mac, Linux, ChromeOS)
+* **Faster iteration:** Bug fixes deploy instantly to web (no app review delays)
+* **Cost-effective:** Single Flutter codebase compiles to web + Android simultaneously
+* **Testing ground:** Validate product-market fit before iOS investment
+
+**Platform Strategy:**
+
+* **v1.0 (MVP):** Chrome + Android → Maximum reach, minimum friction
+* **v1.1:** iOS/iPad + macOS → Apple ecosystem expansion after validation
+* **v1.5+:** Platform refinements and native optimizations
 
 ---
 
@@ -452,6 +467,8 @@ if (connectivity == ConnectivityResult.none) {
 
 **Timeline:** Months 1-6
 
+**Platforms:** Chrome (Web) + Android
+
 **Key Features:**
 
 * ✅ Free global streaming
@@ -459,21 +476,30 @@ if (connectivity == ConnectivityResult.none) {
 * ✅ Artist uploads (global free, UK/EU paid)
 * ✅ Basic search and browse (genre filters)
 * ✅ Artist pages with bio and links
-* ✅ Offline library for purchased tracks
+* ✅ Offline library for purchased tracks (Android + PWA)
 * ✅ Simple, clean UI with Arty mascot
 * ✅ Buy Me a Coffee integration
 * ✅ Geographic feature gating
+* ✅ Progressive Web App (PWA) support for offline web access
 
-**Platform:** Android, macOS
+**Why Web + Android:**
+* Instant deployment (no App Store approval)
+* Maximum reach across all desktop operating systems
+* Single codebase for both platforms
 
-### **Phase 1.5: Polish & Stability**
+### **Phase 1.5: Apple Ecosystem (v1.1)**
 
 **Timeline:** Months 6-9
 
+**Platforms:** iOS/iPad + macOS
+
 **Key Features:**
 
+* iOS/iPad native app
+* macOS native app
+* Apple-specific optimizations (Handoff, Continuity, Widgets)
 * Follow artists
-* User-created playlists (shareable)
+* User-created playlists (shareable, iCloud sync)
 * FLAC/WAV support for audiophiles
 * Artist tips via TrueLayer
 * Enhanced artist analytics
@@ -843,3 +869,5 @@ if (connectivity == ConnectivityResult.none) {
 * v1.1 (Added Payment Architecture) - October 2025
 * v1.2 (Refined Geographic Availability & Phase 2 Strategy) - 31 October 2025
 * v2.0 (Split into Design + Business Plan) - 31 October 2025
+* v2.1 (Added Technical Implementation Details) - 31 October 2025
+* v2.2 (Platform Strategy: Chrome + Android v1.0, iOS/macOS v1.1) - 31 October 2025
