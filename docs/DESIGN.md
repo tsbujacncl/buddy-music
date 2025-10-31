@@ -179,11 +179,34 @@
 * DMCA-style takedown system for disputes.
 * Clear Terms of Use and Artist Agreement displayed before first upload.
 
-### **Content Moderation**
+### **Content Moderation (Automated)**
 
-* Manual moderation queue for first-time uploads (automatic after approval).
-* Community flagging system for inappropriate content.
-* Automated audio fingerprinting (Phase 2) for copyright detection.
+**Multi-layer automated checks minimize manual work:**
+
+**Layer 1: Pre-upload validation (instant)**
+* Duration: 30 seconds - 15 minutes
+* File size: <200MB
+* Format: MP3/WAV/FLAC only
+* Bitrate: >96kbps
+
+**Layer 2: Metadata checks (instant)**
+* Flag suspicious titles (contains "official", "remix", "cover" without cover checkbox)
+* Flag artist names matching famous artists (database check)
+* Require "I confirm original ownership" checkbox if flagged
+
+**Layer 3: Audio fingerprinting (ACRCloud free tier)**
+* 2,000 recognitions/month FREE
+* Checks if track matches copyrighted music database
+* Auto-blocks if match found with message: "This track matches copyrighted content"
+
+**Layer 4: Community flagging (ongoing)**
+* "Report" button on all tracks
+* If 3+ reports → Auto-hide track + notify admin
+* Manual review queue for weekends only (5-10 min/week)
+
+**Manual review only needed for:**
+* Disputed takedowns (rare)
+* Tracks with 3+ community reports (rare)
 
 ### **Compliance**
 
@@ -199,9 +222,227 @@
 
 ### **DRM-Free Philosophy**
 
-* All purchased tracks are DRM-free MP3s (320kbps).
+* All purchased tracks are DRM-free MP3s (192kbps for optimal quality/size balance).
 * Optional invisible watermarking (Phase 2) to trace piracy without restricting use.
 * Trust-based model: listeners support artists by purchasing, not through restrictions.
+* **Multi-device policy:** Unlimited downloads on any device with user login (trust-based, no enforcement in v1.0).
+
+---
+
+## 🔧 **6.5 Technical Implementation Details**
+
+### **Geographic Detection**
+
+**Method:** IP geolocation + user confirmation
+
+**Implementation:**
+1. On first app open, check IP using CloudFlare's free geolocation API
+2. Show confirmation popup: "We detected you're in [UK]. Is this correct?"
+   * Yes → Enable paid features
+   * No → "Select your region" dropdown
+3. Store region in Firestore user profile
+4. Re-check every 30 days (handles permanent moves)
+
+**Travel handling:** UK user traveling to Australia keeps UK features enabled
+
+**Cost:** £0 (CloudFlare geolocation is free)
+
+### **Artist Verification (UK/EU)**
+
+**Method:** Automated bank country verification
+
+**Implementation:**
+1. Artist connects bank account via TrueLayer
+2. TrueLayer returns IBAN/sort code
+3. Check first 2 digits of IBAN = country code
+4. If UK/EU country code → Auto-enable paid uploads
+5. If non-UK/EU → Show "Paid uploads coming soon to [US]"
+
+**Anti-fraud (Phase 2):** Flag if UK artist has 100% sales from non-UK IPs
+
+**Cost:** £0 (uses existing TrueLayer data)
+
+### **Audio Quality & Storage Strategy**
+
+**Optimized for low cost while maintaining quality:**
+
+| Use Case | Format | Bitrate | Processing |
+|----------|--------|---------|------------|
+| **Artist upload** | FLAC/WAV/MP3 | Any | Store original |
+| **Streaming** | MP3 | 128kbps | Transcode on-the-fly via Firebase Functions |
+| **Purchase download** | MP3 | 192kbps | Transcode once, cache result |
+
+**Why 192kbps for purchases:**
+* Transparent quality to most listeners (indistinguishable from lossless)
+* 60% smaller than 320kbps (£5 album = 50MB vs 125MB)
+* Better than Spotify premium (128-160kbps)
+
+**Storage costs:**
+* 1,000 tracks (avg 5 min FLAC originals) = ~50GB = £1.15/month
+* Transcoded MP3 cache = ~15GB = £0.35/month
+* **Total: £1.50/month for 1,000 tracks**
+
+**Processing:** Firebase Functions with ffmpeg for transcoding
+
+### **Search Implementation**
+
+**Backend:** Algolia free tier + Firestore fallback
+
+**Algolia Free Tier:**
+* 10,000 searches/month
+* 10,000 records (tracks)
+* FREE forever
+* Industry-standard instant search
+
+**Implementation:**
+* Firebase Functions → On track upload → Index in Algolia
+* User searches → Query Algolia (instant results)
+* If quota exceeded → Fall back to basic Firestore text search
+
+**Fallback query:**
+```dart
+where('title', '>=', query)
+where('title', '<=', query + '\uf8ff')
+```
+
+**Cost:** £0 for first 10,000 tracks/month
+
+### **Dashboard Updates (Near Real-Time)**
+
+**Method:** Firestore listeners (no expensive WebSockets needed)
+
+**Implementation:**
+```dart
+FirebaseFirestore.instance
+  .collection('artistEarnings')
+  .doc(artistId)
+  .snapshots() // Auto-updates when data changes
+  .listen((snapshot) {
+    // Update UI
+  });
+```
+
+**Update timing:**
+* Sales: 1-5 seconds after purchase
+* Streams: 1-2 minutes (batched to save writes)
+* Followers: Instant
+
+**Cost:** Effectively £0 (Firestore listeners FREE for active connections, ~£0.0000036 per update)
+
+### **Playlist Cloud Sync (Hybrid Model)**
+
+**Smart hybrid system:** Cloud-sync Buddy tracks, keep local MP3s local
+
+**Data model:**
+```dart
+Playlist {
+  id: 'playlist123',
+  name: 'My Chill Mix',
+  tracks: [
+    {
+      type: 'buddy', // From Buddy platform
+      trackId: 'track789',
+      cloudSynced: true ✅
+    },
+    {
+      type: 'local', // User's own MP3
+      filePath: '/storage/music.mp3',
+      cloudSynced: false ❌
+    }
+  ],
+  syncType: 'hybrid' // 'cloud' | 'local' | 'hybrid'
+}
+```
+
+**UI indicators:**
+* Playlist with local tracks: "🏠 Contains local files" badge
+* All Buddy tracks: "☁️ Synced across devices" badge
+
+**Storage:**
+* Cloud playlists → Firestore
+* Local track metadata → SQLite on device
+
+**Cost:** ~£0 (Firestore free tier: 50k reads/day)
+
+### **Payment Integration Architecture**
+
+**Method:** Backend via Firebase Functions (secure approach)
+
+**Architecture:**
+```
+Flutter App → Firebase Functions → TrueLayer API
+```
+
+**Why backend integration:**
+* Keeps TrueLayer API keys secret ✅
+* Enables fraud checks before payment ✅
+* Easier debugging and logging ✅
+* Can batch payout requests ✅
+
+**Purchase flow:**
+1. User taps "Buy £1.00"
+2. Flutter calls Firebase Function: `purchaseTrack(trackId)`
+3. Function creates TrueLayer payment link
+4. Flutter opens TrueLayer SDK (user selects bank)
+5. User authorizes payment in banking app
+6. TrueLayer webhook → Firebase Function → Updates Firestore
+7. Flutter listens to Firestore → Shows "Purchase complete!"
+
+**Security:** TrueLayer credentials never exposed in client code
+
+**Cost:** Firebase Functions free tier: 2M invocations/month
+
+### **Multi-Device Downloads**
+
+**Policy:** Unlimited devices, trust-based (v1.0)
+
+**Implementation:**
+```
+User purchases track → Can download on ANY device with login
+Firestore tracking:
+{
+  purchasedBy: ['user123'],
+  downloadDevices: ['iPhone_abc', 'MacBook_xyz'] // Analytics only
+}
+```
+
+**v1.0:** No enforcement - trust users (aligns with DRM-free philosophy)
+
+**v2.0 Abuse detection (future):**
+* Flag patterns: 10+ devices in 1 month
+* Rate limiting: 5+ downloads of same track in 1 day
+* Manual review for public account sharing
+
+**Philosophy:** Legitimate users have phone + laptop + tablet + work computer. Trust over policing.
+
+**Cost:** £0 (Firestore tracking only)
+
+### **Error Handling & Offline Mode**
+
+**Offline detection:**
+```dart
+ConnectivityResult connectivity = await Connectivity().checkConnectivity();
+
+if (connectivity == ConnectivityResult.none) {
+  Show: "🎧 You're offline. You can still play purchased tracks!"
+}
+```
+
+**Offline mode features:**
+* ✅ Play purchased tracks
+* ✅ Access local playlists
+* ✅ View library
+* ❌ Search/browse online catalog
+* ❌ Stream free tracks
+* ❌ Make purchases
+
+**Error messaging:**
+* Network errors → "You're offline" + Arty sleeping icon 😴
+* Firebase errors → "Buddy's taking a quick nap. Try again?"
+* Payment errors → "Payment didn't go through. Try again or contact support."
+* Unknown errors → "Something went wrong. Error code: XYZ. Contact support."
+
+**Support:** In-app "Contact Support" button → Opens email with device info pre-filled
 
 ---
 
