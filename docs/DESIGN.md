@@ -658,7 +658,7 @@ if (connectivity == ConnectivityResult.none) {
 | **Spacing**          | 8px grid system for consistent layout.                        |
 | **Mood**             | Calm, supportive, independent, creative.                      |
 
-### **8.2 Arty the Bear (Mascot)**
+### **8.2 Arty the Bear & The Teddy Crew (Mascots)**
 
 **Design Notes:**
 
@@ -677,11 +677,103 @@ if (connectivity == ConnectivityResult.none) {
 * Friendly error messages: "Arty couldn't find that track 🔍"
 * Loading states: simple text or minimal animations (no elaborate Arty animations)
 
+---
+
+### **8.2.1 The Teddy Crew - Genre Guides**
+
+**Background Story:**
+The Buddy mascots are based on real childhood teddies belonging to the creator and his brother. Each teddy has a unique personality and represents different music genres/moods, making Buddy feel personal and authentic.
+
+**The Full Teddy Roster:**
+
+| Teddy | Animal | Personality | Genre/Mood | Version |
+|-------|---------|-------------|------------|---------|
+| **Arty** | Blue Bear 🐻 | Calm, friendly, welcoming | Main mascot / General | v1.0 ✅ |
+| **Donkey** | Donkey 🫏 | Sleepy, peaceful, relaxed | Lo-Fi / Chill / Sleep Music | v1.1 💤 |
+| **Ylvis** | Fox 🦊 | Energetic, party-loving, vibrant | EDM / Electronic / Dance | v1.1 ⚡ |
+| **Orla** | Purple Monkey 🐵 | Happy, bubbly, colorful | K-Pop / Pop / Upbeat | v1.1 💜 |
+| **Zipzzy** | Monkey 🐒 | Fast, playful, bouncy | Hip-Hop / Rap / Energetic | v1.5 🎤 |
+| **Smashy** | (TBD) | Intense, powerful, bold | Rock / Metal / Punk | v1.5 🎸 |
+| **Moo Cow** | Cow 🐮 | Gentle, acoustic, down-to-earth | Country / Folk / Acoustic | v1.5 🎻 |
+
+**Phased Rollout Strategy:**
+
+**v1.0 MVP (Weeks 1-9):**
+
+* ✅ Arty only - establish main brand identity
+* Appears in logo, app icon, error states
+* Focus on clean, simple UX without overwhelming users
+
+**v1.1 (Weeks 12-16):**
+
+* 💤 Introduce 3 new teddies subtly as genre guides:
+  * **Donkey** for Lo-Fi/Chill section
+  * **Ylvis** for EDM/Electronic section
+  * **Orla** for K-Pop/Pop section
+* Small avatar icons next to genre categories on Browse screen
+* Hover/tap shows teddy name + short bio
+
+**v1.5+ (Months 6-9):**
+
+* 🎉 Complete teddy roster with all 7 characters
+* Full personality bios for each teddy
+* "About the Teddies" page with backstory + real teddy photos
+* Genre pages show larger teddy artwork + personality description
+
+**Implementation Details:**
+
+**Genre Mapping (Firestore):**
+
+```dart
+genres: [
+  {
+    name: 'Lo-Fi',
+    mascot: 'donkey',
+    mascotMessage: 'Donkey loves naps and peaceful music. Perfect for winding down.',
+    color: '#A8C5E8' // Soft blue
+  },
+  {
+    name: 'EDM',
+    mascot: 'ylvis',
+    mascotMessage: 'Ylvis loves high-energy beats and late-night raves!',
+    color: '#FF6B9D' // Vibrant pink
+  },
+  {
+    name: 'K-Pop',
+    mascot: 'orla',
+    mascotMessage: 'Orla lives for colorful vibes and catchy hooks!',
+    color: '#9B59B6' // Purple
+  }
+]
+```
+
+**UI Components:**
+
+* Genre cards show small teddy avatar (64x64px) in corner
+* Tap genre → Full teddy illustration (256x256px) at top of genre page
+* Subtle animations (teddy waves on genre select)
+
+**Personal Touch:**
+
+* "About the Teddies" page in v1.5+:
+  * Photos of real childhood teddies
+  * Short story about each teddy's origin
+  * "These are our real friends from childhood, now helping you discover music!"
+* Users will connect with the authenticity vs. corporate mascots
+
+**Asset Requirements:**
+
+* v1.0: Arty illustrations only (5-10 expressions)
+* v1.1: Add Donkey, Ylvis, Orla (3 illustrations each)
+* v1.5: Add Zipzzy, Smashy, Moo Cow (3 illustrations each)
+* Total: ~30 teddy illustrations by v1.5
+
 **Future Expansion (v2+):**
 
-* Genre-specific mascot friends (e.g., DJ Panda for electronic, Rockstar Raccoon)
-* Artist can choose favorite mascot for their page
-* Community votes on new mascot designs
+* Artist can choose favorite teddy for their profile
+* Seasonal teddy variants (Arty with Santa hat, etc.)
+* Community teddy fan art gallery
+* Limited edition teddy merch (physical plushies?)
 
 ### **8.3 User Flows**
 
@@ -762,44 +854,437 @@ if (connectivity == ConnectivityResult.none) {
 7. Request payout (£10 minimum) → 1-2 days to bank account
 ```
 
-### **8.4 Key Screens**
+### **8.4 Navigation & Screen Layouts**
 
-#### **Home Screen**
+**Design Philosophy:**
 
-* Top: Search bar, genre filter chips, free/paid toggle
-* Middle: Scrollable sections (New Releases, Trending Free, Top Paid, Genre Spotlights)
-* Bottom: Navigation bar (Home, Search, Library, Profile)
+* **Music-focused only** - No podcasts, audiobooks, or video clutter (unlike Spotify)
+* **Clean 4-tab navigation** - Familiar, simple, effective
+* **Calm browsing experience** - No overwhelming recommendations or algorithmic pressure
+* **Quick access** - Everything is 1-2 taps away
 
-#### **Player Screen**
+---
 
-* Large artwork (centered)
-* Track title, artist name (clickable → artist page)
-* Playback controls (prev, play/pause, next)
-* Progress bar with waveform visualization
-* Bottom: "Buy £X.XX" button (if not owned), "Tip Artist" button
+#### **Bottom Navigation (4 Tabs)**
 
-#### **Artist Page**
+```
+┌───────┬───────┬───────┬───────┐
+│  🏠   │  🔍   │  📚   │  👤   │
+│ Home  │Explore│Library│Profile│
+└───────┴───────┴───────┴───────┘
+```
 
-* Banner image
-* Profile photo (circular)
-* Bio (expandable)
-* Social links (Instagram, Twitter, website)
-* Track list (sortable by date/popularity)
-* Stats (total streams, followers)
+**Tab Structure:**
 
-#### **Library Screen**
+1. **Home** - Discover new music, trending, genre feeds
+2. **Explore** - Search + browse by genre/mood
+3. **Library** - Your music, playlists, follows
+4. **Profile** - Account, stats, settings (artist dashboard if artist)
 
-* Tabs: Purchased, Playlists, Followed Artists
-* Purchased: Grid view of owned albums/singles
-* Playlists: User-created playlists
-* Followed Artists: Latest releases from followed artists
+---
 
-#### **Artist Dashboard**
+#### **1. Home Screen 🏠**
 
-* Summary: Total earnings, streams, sales, followers
-* Recent activity: Latest sales, new followers
-* Analytics: Stream trends, geographic data (Phase 1.5)
-* Payout section: Available balance, payout history, "Request Payout" button
+**Layout:**
+
+```
+┌─────────────────────────────────┐
+│  Buddy 🐻        [🔔] [Profile] │ ← Header (fixed)
+├─────────────────────────────────┤
+│                                 │
+│  🎵 New Releases                │
+│  ┌────┐ ┌────┐ ┌────┐ ┌────┐   │ ← Horizontal scroll
+│  │ 🎵 │ │ 🎵 │ │ 🎵 │ │ 🎵 │   │   Track cards with
+│  │Art │ │Art │ │Art │ │Art │   │   artwork, title,
+│  └────┘ └────┘ └────┘ └────┘   │   artist name
+│                                 │
+│  🔥 Trending Free                │
+│  ┌────┐ ┌────┐ ┌────┐ ┌────┐   │
+│  │ 🎵 │ │ 🎵 │ │ 🎵 │ │ 🎵 │   │
+│  └────┘ └────┘ └────┘ └────┘   │
+│                                 │
+│  💤 Lo-Fi (Donkey)    [See all] │ ← v1.1: Genre rows
+│  ┌────┐ ┌────┐ ┌────┐ ┌────┐   │   with teddy mascots
+│  │ 🎵 │ │ 🎵 │ │ 🎵 │ │ 🎵 │   │
+│  └────┘ └────┘ └────┘ └────┘   │
+│                                 │
+│  ⚡ EDM (Ylvis)       [See all] │
+│  ┌────┐ ┌────┐ ┌────┐ ┌────┐   │
+│  │ 🎵 │ │ 🎵 │ │ 🎵 │ │ 🎵 │   │
+│  └────┘ └────┘ └────┘ └────┘   │
+│                                 │
+│  💜 K-Pop (Orla)      [See all] │
+│  ┌────┐ ┌────┐ ┌────┐ ┌────┐   │
+│  │ 🎵 │ │ 🎵 │ │ 🎵 │ │ 🎵 │   │
+│  └────┘ └────┘ └────┘ └────┘   │
+│                                 │
+└─────────────────────────────────┘
+┌───────┬───────┬───────┬───────┐
+│ ●Home │Explore│Library│Profile│ ← Bottom nav (fixed)
+└───────┴───────┴───────┴───────┘
+```
+
+**v1.0 MVP Features:**
+
+* New Releases feed (most recent uploads)
+* Trending Free (most played this week)
+* Basic genre sections (no mascots yet)
+* Bell icon for notifications (placeholder for v1.1)
+
+**v1.1 Enhancements:**
+
+* Genre rows show teddy mascot names and icons
+* Notifications work (new releases from followed artists)
+* "Top Paid Tracks" section
+
+**Why this works:**
+
+* Familiar Spotify-style feed
+* Pure music focus (no podcast/audiobook clutter)
+* Genre sections keep it organized
+* Horizontal scrolling = quick browsing
+
+---
+
+#### **2. Explore Screen 🔍**
+
+**Layout:**
+
+```
+┌─────────────────────────────────┐
+│  ┌───────────────────────────┐  │
+│  │ 🔍 Search artists, tracks…│  │ ← Search bar (tap = search page)
+│  └───────────────────────────┘  │
+├─────────────────────────────────┤
+│  [Free] [New] [Trending]        │ ← Filter chips
+│                                 │
+│  Browse by Genre                │
+│                                 │
+│  ┌──────┐  ┌──────┐  ┌──────┐  │ ← Genre grid (2x3 or 3x3)
+│  │  💤  │  │  ⚡  │  │  💜  │  │   v1.1: Teddies in corners
+│  │ Lo-Fi│  │ EDM  │  │K-Pop │  │
+│  │      │  │      │  │      │  │
+│  └──────┘  └──────┘  └──────┘  │
+│  ┌──────┐  ┌──────┐  ┌──────┐  │
+│  │  🎤  │  │  🎸  │  │  🎻  │  │
+│  │Hip-  │  │ Rock │  │Count │  │
+│  │ Hop  │  │      │  │ ry   │  │
+│  └──────┘  └──────┘  └──────┘  │
+│                                 │
+│  Browse by Mood                 │
+│  [😌 Chill] [🎉 Party]         │ ← Mood chips
+│  [😴 Sleep] [💪 Workout]       │
+│                                 │
+│  New Artists                    │
+│  ┌──────────────────┐           │ ← Artist cards
+│  │ [Photo] Name     │           │   (horizontal scroll)
+│  │ Genre • 5 tracks │           │
+│  └──────────────────┘           │
+│                                 │
+└─────────────────────────────────┘
+┌───────┬───────┬───────┬───────┐
+│ Home  │●Explor│Library│Profile│
+└───────┴───────┴───────┴───────┘
+```
+
+**v1.0 MVP Features:**
+
+* Search bar (basic Firestore text search)
+* Genre grid (7-10 main genres)
+* Filter chips (Free, New, Trending)
+* New Artists section
+
+**v1.1 Enhancements:**
+
+* Teddy mascots appear in genre cards
+* Tap genre → See teddy illustration + bio at top
+* Algolia search (faster, instant results)
+* Free/Paid filter chip works
+
+**Why this works:**
+
+* Search is prominent but not intrusive
+* Genre browsing is visual and intuitive
+* Mood-based discovery helps users find vibes
+* No algorithmic manipulation - just browse
+
+---
+
+#### **3. Library Screen 📚**
+
+**Layout:**
+
+```
+┌─────────────────────────────────┐
+│  Library                        │
+├─────────────────────────────────┤
+│  [Playlists] [Following] [Rece…]│ ← Tabs (horizontal scroll)
+│                                 │
+│  ─── Playlists ───              │
+│                                 │
+│  ┌─────────────────────────┐   │
+│  │  [+ Create Playlist]    │   │ ← Big button
+│  └─────────────────────────┘   │
+│                                 │
+│  ┌─────────────────────────┐   │ ← Playlist cards
+│  │ 🎵 My Chill Mix         │   │
+│  │ 12 tracks  ☁️           │   │   Cloud sync indicator
+│  └─────────────────────────┘   │
+│                                 │
+│  ┌─────────────────────────┐   │
+│  │ 🎧 Work Focus           │   │
+│  │ 8 tracks  ☁️            │   │
+│  └─────────────────────────┘   │
+│                                 │
+│  ┌─────────────────────────┐   │
+│  │ 🏠 Local Files          │   │
+│  │ 24 tracks  📱           │   │   Local only indicator
+│  └─────────────────────────┘   │
+│                                 │
+└─────────────────────────────────┘
+┌───────┬───────┬───────┬───────┐
+│ Home  │Explore│●Librar│Profile│
+└───────┴───────┴───────┴───────┘
+```
+
+**Tabs:**
+
+1. **Playlists** - User-created playlists
+2. **Following** - Followed artists' latest releases
+3. **Recent** - Recently played tracks
+4. **Purchased** (v1.1) - Owned tracks/albums
+
+**v1.0 MVP Features:**
+
+* Create playlists (cloud-synced)
+* Follow artists
+* Recently played history
+* Local file indicators (hybrid playlists)
+
+**v1.1 Enhancements:**
+
+* Purchased tab (DRM-free downloads)
+* Download status indicators
+* Sort options (A-Z, Date Added, Custom)
+
+**Why this works:**
+
+* Clean organization by tabs
+* Playlists front and center
+* Clear indicators for cloud vs local
+* No algorithmic "Made for You" pressure
+
+---
+
+#### **4. Profile Screen 👤**
+
+**For Listeners:**
+
+```
+┌─────────────────────────────────┐
+│                                 │
+│      ┌─────────────┐            │
+│      │   [Photo]   │            │ ← Profile photo
+│      └─────────────┘            │
+│      Your Name                  │
+│      your@email.com             │
+│                                 │
+├─────────────────────────────────┤
+│                                 │
+│  📊 Your Stats                  │
+│  • 1,234 tracks played          │
+│  • 45 artists followed          │
+│  • 8 playlists created          │
+│                                 │
+│  ───────────────────            │
+│                                 │
+│  ⚙️ Settings                    │
+│  • Account settings             │
+│  • Audio quality                │
+│  • Download preferences         │
+│  • Privacy & data               │
+│                                 │
+│  🎨 Become an Artist            │ ← Switch to artist mode
+│                                 │
+│  ℹ️ About                       │
+│  • About the Teddies (v1.5)     │
+│  • Help & Support               │
+│  • Privacy Policy               │
+│                                 │
+│  [Log Out]                      │
+│                                 │
+└─────────────────────────────────┘
+```
+
+**For Artists:**
+
+```
+┌─────────────────────────────────┐
+│                                 │
+│      ┌─────────────┐            │
+│      │   [Photo]   │            │
+│      └─────────────┘            │
+│      Artist Name                │
+│      🎵 Artist Account          │
+│                                 │
+├─────────────────────────────────┤
+│                                 │
+│  📊 Quick Stats                 │
+│  • 5,432 total streams          │
+│  • 89 followers                 │
+│  • £45.60 earned (v1.1)         │
+│                                 │
+│  [📊 View Full Dashboard]       │ ← Opens artist dashboard
+│                                 │
+│  ───────────────────            │
+│                                 │
+│  🎵 My Uploads                  │
+│  [+ Upload New Track]           │
+│                                 │
+│  ┌──────┐ ┌──────┐ ┌──────┐    │ ← Recent uploads
+│  │Track1│ │Track2│ │Track3│    │   (horizontal scroll)
+│  │ 234  │ │ 187  │ │ 56   │    │   Stream counts
+│  └──────┘ └──────┘ └──────┘    │
+│                                 │
+│  ───────────────────            │
+│                                 │
+│  ⚙️ Settings                    │
+│  • Artist profile               │
+│  • Bank details (v1.1)          │
+│  • Audio quality                │
+│                                 │
+│  [Switch to Listener View]      │
+│                                 │
+└─────────────────────────────────┘
+```
+
+**v1.0 MVP Features:**
+
+* Basic stats (streams played, artists followed)
+* Settings (account, audio quality)
+* Artist mode toggle
+* Artist uploads section
+
+**v1.1 Enhancements:**
+
+* Earnings stats for artists
+* Bank details management
+* Full artist dashboard link
+
+**Why this works:**
+
+* Clean, minimal profile
+* Artists get quick stats without leaving profile
+* Full dashboard is separate (not cluttered)
+* Easy toggle between listener/artist modes
+
+---
+
+#### **Additional Key Screens**
+
+**Player Screen (Mini):**
+
+```
+┌─────────────────────────────────┐
+│ [Content from current tab]      │
+│                                 │
+│                                 │
+├─────────────────────────────────┤ ← Sticky bottom
+│ 🎵 Track Title                  │   (above nav)
+│ Artist Name            [▶] [❤]  │
+└─────────────────────────────────┘
+┌───────┬───────┬───────┬───────┐
+│ Home  │Explore│Library│Profile│
+└───────┴───────┴───────┴───────┘
+```
+
+**Player Screen (Full):**
+
+```
+┌─────────────────────────────────┐
+│  [←]                      [⋮]   │ ← Back, Menu
+├─────────────────────────────────┤
+│                                 │
+│     ┌─────────────────┐         │
+│     │                 │         │
+│     │   Album Art     │         │ ← Large artwork
+│     │                 │         │
+│     └─────────────────┘         │
+│                                 │
+│  Track Title                    │
+│  Artist Name (tap → artist pg)  │
+│                                 │
+│  ━━━━━━●━━━━━━━━━━━━━━━━━━━   │ ← Progress bar
+│  1:23              3:45         │
+│                                 │
+│     [🔀]  [⏮]  [▶]  [⏭]  [🔁]  │ ← Playback controls
+│                                 │
+│  ─────────────────────          │
+│                                 │
+│  [💳 Buy £1.00] [💝 Tip Artist] │ ← v1.1: Purchase
+│                                 │
+└─────────────────────────────────┘
+```
+
+**Artist Page:**
+
+```text
+┌─────────────────────────────────┐
+│  [←]                      [⋮]   │
+├─────────────────────────────────┤
+│  ┌───────────────────────────┐  │
+│  │   Banner Image            │  │ ← Banner
+│  └───────────────────────────┘  │
+│     ┌─────┐                     │
+│     │Photo│                     │ ← Profile photo
+│     └─────┘                     │
+│  Artist Name                    │
+│  Genre • 5,432 streams          │
+│                                 │
+│  [Follow] [Share]               │ ← Action buttons
+│                                 │
+│  Bio text goes here, expandable │
+│  [Read more...]                 │
+│                                 │
+│  🔗 instagram.com/artist        │ ← Social links
+│  🌐 artistwebsite.com           │
+│                                 │
+│  ─── Tracks ───────             │
+│                                 │
+│  ┌─────────────────────────┐   │
+│  │ 🎵 Track 1              │   │ ← Track list
+│  │ 234 plays • Free        │   │   (sortable)
+│  └─────────────────────────┘   │
+│  ┌─────────────────────────┐   │
+│  │ 🎵 Track 2              │   │
+│  │ 187 plays • £1.00       │   │
+│  └─────────────────────────┘   │
+│                                 │
+└─────────────────────────────────┘
+```
+
+---
+
+#### **Design Principles Summary**
+
+**What Buddy DOES have:**
+
+* ✅ Clean 4-tab navigation
+* ✅ Music-focused content only
+* ✅ Genre/mood-based discovery
+* ✅ Personal touch with teddy mascots (v1.1+)
+* ✅ Artist tools integrated seamlessly
+
+**What Buddy DOESN'T have (unlike Spotify):**
+
+* ❌ No podcasts section
+* ❌ No audiobooks
+* ❌ No video content
+* ❌ No aggressive algorithmic recommendations
+* ❌ No social feed clutter
+* ❌ No "Made for You" manipulation
+
+**Result:** A calm, focused music experience that respects the user's time and attention.
 
 ---
 
@@ -995,3 +1480,5 @@ if (connectivity == ConnectivityResult.none) {
 * v2.1 (Added Technical Implementation Details) - 31 October 2025
 * v2.2 (Platform Strategy: Chrome + Android v1.0, iOS/macOS v1.1) - 31 October 2025
 * v3.0 (MVP Refocus: Free Music First, Payments in v1.1) - 31 October 2025
+* v3.1 (Added The Teddy Crew: Real childhood teddies as genre guides) - 31 October 2025
+* v3.2 (Added detailed screen layouts: 4-tab navigation, music-focused design) - 31 October 2025
