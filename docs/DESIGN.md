@@ -1493,7 +1493,7 @@ genres: [
 **Why Buddy > Spotify:**
 
 * Artists earn 300x more per £1 purchase (£0.90 vs £0.003/stream)
-* Listeners own music forever (no subscription dependency)
+* Listeners support artists they love with direct purchases
 * Ad-free experience for everyone
 
 **Why Buddy > Bandcamp:**
@@ -1516,7 +1516,7 @@ genres: [
 >
 > * Artists worldwide create and upload directly.
 > * All artists monetize fairly with 90% revenue share (regardless of region).
-> * Listeners own music they love without subscriptions.
+> * Listeners support artists they love by owning their music.
 > * Low-cost payment solutions enable global sustainability.
 > * Developers contribute through open APIs.
 > * Arty the Bear becomes a creative mascot for fair art on the internet.
@@ -1526,7 +1526,7 @@ genres: [
 * Shift listener mindset from "streaming rental" to "music ownership"
 * Normalize $1-5 music purchases as fair compensation for artists
 * Build trust through open-source transparency
-* Create sustainable alternative to ad-driven/subscription platforms
+* Create sustainable platform that prioritizes supporting artists over corporate profits
 
 **Community-Driven Development:**
 
