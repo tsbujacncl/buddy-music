@@ -642,6 +642,187 @@ if (connectivity == ConnectivityResult.none) {
 
 ---
 
+### **Priority Features & Design Decisions**
+
+#### **New Artist Discovery (Top Priority)**
+
+**Why it matters:**
+* New artists struggle to get discovered on Spotify/Apple Music
+* Algorithmic playlists favor established artists
+* Buddy will prioritize surfacing new, underappreciated artists
+
+**Implementation:**
+
+**v1.0 MVP:**
+* "New Artists" section on Explore screen (horizontal scroll)
+* Recent uploads get priority in "New Releases" feed
+* Sort by "Newest First" default on genre pages
+* No minimum follower/stream requirement to appear
+
+**v1.1+:**
+* "Rising Artists" section (artists with growing streams/followers)
+* Weekly "New Artist Spotlight" feature
+* Listener badges for "Early Supporter" (followed artist before 100 followers)
+* Artist notification when they get first 10, 50, 100 followers
+
+**v2.0+:**
+* "Discover Weekly" - but ethical (no pay-to-play)
+* Genre-specific "New Artist Tuesdays"
+* Community voting for featured artists
+* Artist application for homepage feature
+
+---
+
+#### **Better Shuffle Algorithm**
+
+**The Problem with Spotify Shuffle:**
+* User complaints: "Plays same songs repeatedly"
+* "Smart Shuffle" adds unwanted recommendations
+* Not truly random - uses engagement algorithms
+
+**Buddy's Solution: True Smart Shuffle**
+
+**v1.0 Implementation:**
+* **Fisher-Yates shuffle** (cryptographically random)
+* **Session memory** - tracks won't repeat until full playlist played
+* **Artist spread** - won't play same artist twice in a row (if possible)
+* **No algorithmic bias** - purely random based on user's selection
+
+**Algorithm:**
+```dart
+// Shuffle with artist spread
+1. Fisher-Yates shuffle entire playlist
+2. Scan for back-to-back same artist
+3. If found, swap second occurrence with next different artist
+4. Mark all tracks as "unplayed" for session
+5. Remove from pool as played
+6. When pool empty, re-shuffle and restart
+```
+
+**User Controls:**
+* Toggle: "True Random" (pure Fisher-Yates) vs "Smart Spread" (artist spacing)
+* "Recently Played" history (last 20 tracks)
+* "Shuffle Queue" - see upcoming tracks in shuffle
+
+**No "Smart Shuffle":**
+* We will NEVER add songs user didn't select
+* Shuffle means shuffle, not "recommendations disguised as shuffle"
+
+---
+
+#### **Heart/Like System (Classic Design)**
+
+**Inspiration:** Old Spotify heart design (pre-2016)
+
+**Design:**
+
+```
+Track Card:
+┌────────────────┐
+│  [Album Art]   │
+│                │  ← Heart icon (top-right corner)
+│            ❤️  │    Hollow when unliked
+│                │    Filled red when liked
+├────────────────┤
+│ Track Title    │
+│ Artist Name    │
+└────────────────┘
+```
+
+**Interaction:**
+* **Tap heart** - like/unlike track
+* **Animation** - heart fills with red, slight scale bounce (1.2x)
+* **Haptic feedback** - light vibration on like
+* **Instant sync** - Firestore update, syncs across devices
+
+**Liked Tracks:**
+* Saved to "Liked Songs" playlist automatically
+* Accessible from Library > "Liked Songs"
+* Cloud-synced across devices
+* Can be added to other playlists
+
+**Why Classic Heart (not +/− or checkmark):**
+* Universal symbol of "love this music"
+* Nostalgic (old Spotify users miss it)
+* More emotional connection than "add to library"
+* Clear visual feedback (filled vs outline)
+
+---
+
+#### **Buddy Wrapped (Future Feature - v2.0+)**
+
+**Spotify Wrapped, but Better:**
+
+**What Spotify Wrapped Does Well:**
+* Year-end personalized listening stats
+* Shareable social graphics
+* Gamification (top genres, minutes listened)
+* Creates anticipation/excitement
+
+**What Buddy Wrapped Will Do Better:**
+
+**Available Any Time (not just December):**
+* Monthly Wrapped (view stats anytime)
+* Custom date range ("Show my summer listening")
+* Real-time dashboard (always accessible)
+
+**Artist-Focused Stats:**
+* "You discovered X new artists this month"
+* "You were an early supporter of [Artist]"
+* "You helped [Artist] reach their first 100 streams"
+* Direct artist shoutouts ("Thank you for supporting!")
+
+**Listener Stats:**
+* Top genres, artists, tracks (as expected)
+* Minutes listened (total + per genre)
+* Diversity score (how many different genres/artists)
+* "Hipster Score" (% of artists with <1000 followers)
+* Support impact: "You paid £X directly to artists this year"
+
+**Shareable Graphics:**
+* Customizable templates with Buddy branding
+* Teddy mascots based on top genre (Donkey for Lo-Fi fans, etc.)
+* Instagram Story format + Twitter card format
+* "I supported independent music" badge
+
+**Privacy-First:**
+* Opt-in only (can disable in settings)
+* Choose what stats to share
+* No forced social sharing
+
+**Implementation Plan:**
+* v1.0: Basic listening stats in profile
+* v1.5: Monthly recap feature
+* v2.0: Full "Buddy Wrapped" with graphics
+
+---
+
+#### **Bottom Navigation Icons**
+
+**Decision: Material Icons (not emoji)**
+
+**v1.0 Implementation:**
+
+| Tab | Icon | Active State | Inactive State |
+|-----|------|--------------|----------------|
+| **Home** | Material Icons: `home` | Filled blue (#5C9DFF) | Outline gray (#95A5A6) |
+| **Explore** | Material Icons: `search` | Filled blue | Outline gray |
+| **Library** | Material Icons: `library_music` | Filled blue | Outline gray |
+| **Profile** | Material Icons: `person` | Filled blue | Outline gray |
+
+**Active Indicator:**
+* Icon fills with primary blue
+* Label appears in blue (always visible)
+* Inactive tabs show gray outline icons + gray labels
+
+**Why Material Icons:**
+* Consistent with Android/Web design language
+* Cleaner than emoji on different devices
+* Professional appearance
+* Better accessibility (screen readers)
+
+---
+
 ## 🎨 **8. User Experience Design**
 
 ### **8.1 Visual Identity**
@@ -653,9 +834,16 @@ if (connectivity == ConnectivityResult.none) {
 | **Secondary Colour** | `#F2F5FA` (off-white background)                              |
 | **Accent Colour**    | `#FFD86B` (warm yellow for buttons/tips)                      |
 | **Text Colour**      | `#2C3E50` (charcoal grey for body text)                       |
+| **Error Red**        | `#E74C3C` (warm red for errors)                               |
+| **Success Green**    | `#2ECC71` (vibrant green for success states)                  |
+| **Neutral Gray**     | `#95A5A6` (disabled/inactive elements)                        |
 | **Typography**       | Inter / SF Pro; medium weight for titles, regular for body.   |
+| **Font Sizes**       | Headings: 20px (Medium 500), Tracks: 16px (Medium 500), Body: 14px (Regular 400), Small: 12px (Regular 400) |
 | **Border Radius**    | 12px for cards, 8px for buttons (soft, friendly).             |
 | **Spacing**          | 8px grid system for consistent layout.                        |
+| **Track Cards**      | Rectangular 3:4 aspect ratio (~140px × 186px), rounded corners |
+| **Loading States**   | Shimmer effect for content, spinner for actions               |
+| **Animations**       | Instant transitions (v1.0), tap scale down 0.95, pull-to-refresh enabled |
 | **Mood**             | Calm, supportive, independent, creative.                      |
 
 ### **8.2 Arty the Bear & The Teddy Crew (Mascots)**
