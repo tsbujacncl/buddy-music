@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../models/track_model.dart';
 import '../services/track_service.dart';
+import '../services/audio_player_service.dart';
 import '../widgets/track_card.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -12,6 +13,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final TrackService _trackService = TrackService();
+  final AudioPlayerService _audioService = AudioPlayerService();
 
   List<TrackModel> _allTracks = [];
   List<TrackModel> _newReleases = [];
@@ -203,13 +205,9 @@ class _HomeScreenState extends State<HomeScreen> {
                             return TrackCard(
                               track: _allTracks[index],
                               onTap: () {
-                                // TODO: Navigate to player screen (M3)
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text(
-                                      'Playing: ${_allTracks[index].title}',
-                                    ),
-                                  ),
+                                _audioService.playPlaylist(_allTracks, index);
+                                _trackService.incrementStreamCount(
+                                  _allTracks[index].trackId,
                                 );
                               },
                             );
@@ -295,12 +293,8 @@ class _HomeScreenState extends State<HomeScreen> {
               child: TrackCard(
                 track: tracks[index],
                 onTap: () {
-                  // TODO: Navigate to player screen (M3)
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text('Playing: ${tracks[index].title}'),
-                    ),
-                  );
+                  _audioService.playPlaylist(tracks, index);
+                  _trackService.incrementStreamCount(tracks[index].trackId);
                 },
               ),
             ),

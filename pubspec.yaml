@@ -39,6 +39,10 @@ dependencies:
   cloud_firestore: ^6.0.3
   firebase_storage: ^13.0.3
 
+  # Audio playback
+  just_audio: ^0.9.40
+  audio_service: ^0.18.15
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

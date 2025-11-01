@@ -151,22 +151,22 @@ streamEvents/{eventId}
 
 ---
 
-## 🎵 **M3: Music Player (Week 4)**
+## 🎵 **M3: Music Player (Week 4)** ✅
 
 **Goal:** Implement core audio playback functionality.
 
 **Core Playback:**
-- [ ] Integrate `just_audio` package
-- [ ] Player screen (full-screen artwork, controls, progress bar)
-- [ ] Mini-player (sticky bottom bar with play/pause, track info)
-- [ ] Play/pause, next, previous controls
-- [ ] Seek/scrub functionality
+- [x] Integrate `just_audio` package
+- [x] Player screen (full-screen artwork, controls, progress bar)
+- [x] Mini-player (sticky bottom bar with play/pause, track info)
+- [x] Play/pause, next, previous controls
+- [x] Seek/scrub functionality
 
 **Audio Streaming:**
-- [ ] Stream MP3 from Firebase Storage URLs
-- [ ] Handle loading states
-- [ ] Handle network errors gracefully
-- [ ] Background audio support (keep playing when app minimized)
+- [x] Stream MP3 from Firebase Storage URLs
+- [x] Handle loading states
+- [x] Handle network errors gracefully
+- [x] Background audio support (keep playing when app minimized)
 
 ---
 

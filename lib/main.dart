@@ -3,15 +3,22 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'firebase_options.dart';
 import 'services/auth_service.dart';
+import 'services/audio_player_service.dart';
 import 'screens/login_screen.dart';
 import 'screens/signup_screen.dart';
 import 'screens/home_screen.dart';
+import 'widgets/mini_player.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  // Initialize audio player service
+  final audioService = AudioPlayerService();
+  audioService.setupAutoPlay();
+
   runApp(const BuddyApp());
 }
 
@@ -124,8 +131,24 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final audioService = AudioPlayerService();
+
     return Scaffold(
-      body: _screens[_selectedIndex],
+      body: Column(
+        children: [
+          Expanded(child: _screens[_selectedIndex]),
+          // Mini player appears when a track is playing
+          StreamBuilder<bool>(
+            stream: audioService.playingStream,
+            builder: (context, snapshot) {
+              if (audioService.currentTrack != null) {
+                return MiniPlayer();
+              }
+              return const SizedBox.shrink();
+            },
+          ),
+        ],
+      ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
