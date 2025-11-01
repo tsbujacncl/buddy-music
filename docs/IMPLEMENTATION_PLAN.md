@@ -119,16 +119,16 @@ streamEvents/{eventId}
 **Goal:** Set up user authentication and basic app navigation.
 
 **Authentication:**
-- [ ] Firebase Auth setup (email/password)
-- [ ] Login screen
-- [ ] Sign up screen
-- [ ] "Continue as Guest" option (stream without account)
-- [ ] Artist profile setup screen
+- [x] Firebase Auth setup (email/password)
+- [x] Login screen
+- [x] Sign up screen
+- [x] "Continue as Guest" option (stream without account)
+- [x] Artist profile setup screen (integrated in signup)
 
 **UI Foundation:**
-- [ ] Create Material 3 theme with Buddy colors
-- [ ] Bottom navigation bar (Home, Search, Library, Profile)
-- [ ] Responsive layout for web + mobile
+- [x] Create Material 3 theme with Buddy colors
+- [x] Bottom navigation bar (Home, Search, Library, Profile)
+- [x] Responsive layout for web + mobile
 
 ---
 
