@@ -499,9 +499,9 @@ if (connectivity == ConnectivityResult.none) {
 
 ## 🌍 **7. Product Roadmap**
 
-### **Phase 1: MVP (v1.0) - Free Music Platform**
+### **M0-M8: MVP (v1.0) - Free Music Platform**
 
-**Timeline:** Weeks 1-9 (2 months)
+**Timeline:** 9 weeks (2 months) - Milestones M0 through M8
 
 **Platforms:** Chrome (Web) + Android
 
@@ -537,9 +537,9 @@ if (connectivity == ConnectivityResult.none) {
 * 500 streams
 * Positive feedback
 
-### **Phase 1.1: Payments & Monetization**
+### **M10: Payments & Monetization**
 
-**Timeline:** Weeks 12-16 (Months 3-4)
+**Timeline:** Milestone 10 (Weeks 12-16, Months 3-4)
 
 **Platforms:** Chrome (Web) + Android (same as v1.0)
 
@@ -556,12 +556,12 @@ if (connectivity == ConnectivityResult.none) {
 * 💳 Geographic feature gating (detect UK/EU users)
 * 📊 Enhanced analytics (sales, earnings)
 
-**Trigger for v1.1:**
-* v1.0 has 50+ artists and 500+ users
+**Trigger for M10:**
+* M8 launch has 50+ artists and 500+ users
 * Positive user feedback on free platform
 * Artists requesting monetization features
 
-### **Phase 1.5: Apple Ecosystem**
+### **M9-M10+: Apple Ecosystem & Beyond**
 
 **Timeline:** Months 6-9
 
@@ -848,22 +848,120 @@ Track Card:
 
 ### **8.2 Arty the Bear & The Teddy Crew (Mascots)**
 
-**Design Notes:**
+**Design Philosophy:**
 
-* Calm blue bear wearing headphones
-* Appears in: app icon, logo, loading states, error messages
-* Different expressions for different contexts:
-  * 🎧 Standard: listening to music (default)
-  * 🔍 Detective: magnifying glass for "not found" errors
-  * ✨ Celebrating: when artist gets first sale
-  * 😴 Sleeping: maintenance mode
+The Buddy mascots are **100% original characters** created specifically for the platform. While inspired by childhood teddies, they are designed as modern 2D vector mascots, not replicas of any existing toys or licensed characters.
 
-**Usage Guidelines:**
+**Critical: Legal Safety**
 
-* Use sparingly - logo and key UI moments only
-* No forced mascot in every screen (not Clippy!)
-* Friendly error messages: "Arty couldn't find that track 🔍"
-* Loading states: simple text or minimal animations (no elaborate Arty animations)
+* ✅ All mascots are **original commissioned artwork**
+* ✅ **NOT based on Build-A-Bear designs** or any trademarked plush toys
+* ✅ **2D vector illustration style**, not realistic plush textures
+* ✅ Each character has **unique music-themed accessories** establishing them as music mascots
+* ✅ **Mascot proportions** (large heads, expressive eyes) differentiate from realistic toy designs
+
+---
+
+## **Arty the Bear - Design Specifications**
+
+**Core Identity:**
+Arty is Buddy's main mascot - a friendly, calm blue bear who loves music and helps users discover new artists.
+
+### **Visual Style Requirements**
+
+**Art Style:**
+
+* **2D vector illustration** (Duolingo/Headspace-style)
+* **Flat colors with minimal shading** (clean, modern, scalable)
+* **NOT realistic plush toy style** (no fabric texture, seams, or 3D rendering)
+* Professional, friendly, approachable aesthetic
+
+**Proportions (Mascot-Style):**
+
+* **Head-to-body ratio: 1.2:1** (oversized head = mascot character, not realistic teddy)
+* **Large prominent ears** (~1/3 of head width each)
+* **Rounded belly** (friendly, approachable)
+* **Short limbs** (chunky, cute proportions)
+
+**Facial Features:**
+
+* **Eyes: Large and expressive** (30% of face area)
+  * Round shape with shiny highlights (2 white dots per eye)
+  * Blue or brown irises with visible pupils
+  * Much larger than realistic teddy eyes
+* **Nose: Large button style** (heart-shaped or round black nose)
+* **Mouth: Wide, friendly smile** (can show different expressions)
+* **Eyebrows: Thin, curved** (adds expressiveness - teddies typically don't have eyebrows)
+* **Optional: Rosy pink cheeks** (friendly, warm)
+
+**Color:**
+
+* **Primary blue: #5C9DFF** (Buddy brand color - soft, friendly blue)
+* **Headphones: Red or yellow** (contrasts with blue body, highly visible)
+* **Accents: White highlights** (eyes, optional belly patch)
+
+**Accessories (Critical for Differentiation):**
+
+* **Large over-ear headphones** (red or yellow - signature element)
+  * Always present in all artwork
+  * Establishes Arty as music mascot, not generic bear
+  * Makes character instantly recognizable
+* **Optional: Small music note** on chest/belly
+* **Optional: Simple t-shirt** with Buddy logo
+
+### **Expression Variations**
+
+Arty should have multiple expressions for different contexts:
+
+1. **🎧 Standard (Default):**
+   * Gentle smile, friendly eyes
+   * Listening to music pose
+   * Used in: logo, app icon, general UI
+
+2. **🔍 Detective:**
+   * Holding magnifying glass
+   * Curious, searching expression
+   * Used in: "not found" errors, search screens
+
+3. **✨ Celebrating:**
+   * Wide smile, sparkly eyes
+   * Excited, happy pose (maybe jumping or arms up)
+   * Used in: first sale, milestone achievements
+
+4. **😴 Sleeping:**
+   * Closed eyes, peaceful expression
+   * Sitting/leaning relaxed pose
+   * Used in: maintenance mode, downtime
+
+5. **😮 Surprised:**
+   * Wide eyes, open mouth (slight O shape)
+   * Used in: errors, unexpected events
+
+**Technical Deliverables:**
+
+* **Format:** Vector files (AI, SVG, PDF) + PNG exports
+* **Sizes:** 16px, 64px, 256px, 512px (app icon sizes)
+* **Variations:** 5 expressions minimum
+* **Usage rights:** Full commercial rights transferred
+
+### **Usage Guidelines**
+
+**Where Arty appears:**
+* App icon (headshot with headphones)
+* Logo (full body or headshot)
+* Loading states (simple illustration)
+* Error messages (with appropriate expression)
+* "About" page
+
+**Where Arty does NOT appear:**
+* Not in every screen (avoid "Clippy" syndrome)
+* Not in elaborate animations (v1.0 - keep simple)
+* Not forced into music player (unless contextual)
+
+**Messaging examples:**
+* "Arty couldn't find that track 🔍" (search error)
+* "Arty is loading your music..." (loading state)
+* "Congratulations! Arty is celebrating with you! ✨" (first purchase)
 
 ---
 
@@ -1544,7 +1642,7 @@ genres: [
 
 ## 📋 **11. Implementation Priorities**
 
-### **Must-Have for v1.0 MVP (Free Music Platform - Weeks 1-9)**
+### **Must-Have for v1.0 MVP (Free Music Platform - M0 through M8)**
 
 **Authentication & Users:**
 * ✅ Firebase Auth (email/password + continue as guest)
@@ -1579,9 +1677,9 @@ genres: [
 * ✅ Loading states, error messages
 * ✅ Responsive design (web + mobile)
 
-**Total: ~8 weeks of development**
+**Total: ~8 weeks of development (M1-M8)**
 
-### **Must-Have for v1.1 (Payments - Weeks 12-16)**
+### **Must-Have for M10 (Payments - Weeks 12-16)**
 
 **Payment Infrastructure:**
 * 💳 TrueLayer integration (Firebase Functions)
@@ -1603,9 +1701,9 @@ genres: [
 * 💳 Buy Me a Coffee integration
 * 💳 Enhanced analytics (revenue, geography)
 
-**Total: ~4 weeks of development** (after v1.0 validation)
+**Total: ~4 weeks of development** (after M8 validation)
 
-### **Nice-to-Have for v1.5 (Apple Ecosystem)**
+### **Nice-to-Have for M9+ (Apple Ecosystem & Iterations)**
 
 * iOS/iPad native app
 * macOS native app

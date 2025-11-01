@@ -33,16 +33,16 @@
 
 ---
 
-## ⚡ **Phase 0: Essential Setup (Week 1)**
+## ⚡ **M0: Essential Setup (Week 1)**
 
 **Goal:** Get infrastructure ready to start coding.
 
 ### **1. Firebase Setup** 🔥 (2-3 hours)
 
-- [ ] Create Firebase project at [console.firebase.google.com](https://console.firebase.google.com)
-- [ ] Enable: Authentication (email/password), Firestore, Storage, Hosting
+- [x] Create Firebase project at [console.firebase.google.com](https://console.firebase.google.com)
+- [x] Enable: Authentication (email/password), Firestore, Storage, Hosting
 - [ ] Upgrade to Blaze plan (set £10 budget alert)
-- [ ] Download `google-services.json` (Android) and web config
+- [x] Download `google-services.json` (Android) and web config
 
 ### **2. Basic Assets** 🎨 (Optional - can refine later)
 
@@ -52,10 +52,10 @@
 
 ### **3. Development Environment** 💻 (2-3 hours)
 
-- [ ] Install Flutter SDK + Android Studio
-- [ ] Run `flutter doctor` (verify setup)
-- [ ] Install Firebase CLI: `npm install -g firebase-tools`
-- [ ] Set up VS Code / Android Studio with Flutter plugins
+- [x] Install Flutter SDK + Android Studio
+- [x] Run `flutter doctor` (verify setup)
+- [x] Install Firebase CLI: `npm install -g firebase-tools`
+- [x] Set up VS Code / Android Studio with Flutter plugins
 
 ### **4. Database Schema** 📊 (2-3 hours)
 
@@ -108,15 +108,15 @@ streamEvents/{eventId}
   - region: string
 ```
 
-**Note:** Purchase-related collections will be added in v1.1 when payments are implemented.
+**Note:** Purchase-related collections will be added in M10 when payments are implemented.
 
 **Time: 1 week (can do in parallel with coursework)**
 
 ---
 
-## 🏗️ **Phase 1: MVP Development (Weeks 2-8)**
+## 🏗️ **M1: Authentication & Core UI (Week 2)**
 
-### **Week 2: Authentication & Core UI**
+**Goal:** Set up user authentication and basic app navigation.
 
 **Authentication:**
 - [ ] Firebase Auth setup (email/password)
@@ -130,7 +130,11 @@ streamEvents/{eventId}
 - [ ] Bottom navigation bar (Home, Search, Library, Profile)
 - [ ] Responsive layout for web + mobile
 
-### **Week 3: Home & Browse**
+---
+
+## 🏠 **M2: Home & Browse (Week 3)**
+
+**Goal:** Build the main content discovery interface.
 
 **Home Screen:**
 - [ ] Track feed (grid/list view)
@@ -145,7 +149,11 @@ streamEvents/{eventId}
 - [ ] Load tracks with pagination (20 per page)
 - [ ] Pull-to-refresh
 
-### **Week 4: Music Player**
+---
+
+## 🎵 **M3: Music Player (Week 4)**
+
+**Goal:** Implement core audio playback functionality.
 
 **Core Playback:**
 - [ ] Integrate `just_audio` package
@@ -160,7 +168,11 @@ streamEvents/{eventId}
 - [ ] Handle network errors gracefully
 - [ ] Background audio support (keep playing when app minimized)
 
-### **Week 5: Search & Discovery**
+---
+
+## 🔍 **M4: Search & Discovery (Week 5)**
+
+**Goal:** Enable users to find music easily.
 
 **Search Implementation:**
 - [ ] Search bar on Search tab
@@ -174,7 +186,11 @@ streamEvents/{eventId}
 - [ ] Sort options (Newest, Most Played, A-Z)
 - [ ] Artist discovery (browse artists, view artist pages)
 
-### **Week 6: Artist Upload**
+---
+
+## 🎨 **M5: Artist Upload (Week 6)**
+
+**Goal:** Allow artists to upload their music.
 
 **Upload Flow:**
 - [ ] Upload screen (only visible to artists)
@@ -195,7 +211,11 @@ streamEvents/{eventId}
 - [ ] Total streams counter
 - [ ] Edit/delete track options
 
-### **Week 7: Playlists & Library**
+---
+
+## 📚 **M6: Playlists & Library (Week 7)**
+
+**Goal:** Give users personal music organization.
 
 **User Library:**
 - [ ] Library tab shows user's playlists
@@ -209,7 +229,11 @@ streamEvents/{eventId}
 - [ ] Repeat mode (none/one/all)
 - [ ] Next/previous track in playlist context
 
-### **Week 8: Polish & Testing**
+---
+
+## ✨ **M7: Polish & Testing (Week 8)**
+
+**Goal:** Refine UX and ensure quality before launch.
 
 **User Experience:**
 - [ ] Loading skeletons (shimmer effect)
@@ -230,7 +254,9 @@ streamEvents/{eventId}
 
 ---
 
-## 🚀 **Phase 2: Launch (Week 9)**
+## 🚀 **M8: Launch (Week 9)**
+
+**Goal:** Deploy to production and go live!
 
 ### **Production Setup**
 
@@ -267,9 +293,9 @@ streamEvents/{eventId}
 
 ---
 
-## 🔮 **Phase 3: Post-MVP (Weeks 10+)**
+## 🔄 **M9: Post-Launch Improvements (Weeks 10-11)**
 
-### **v1.0.5 - First Improvements (Week 10-11)**
+**Goal:** Iterate based on user feedback and fix issues.
 
 **Based on feedback:**
 - [ ] Bug fixes from launch
@@ -281,7 +307,11 @@ streamEvents/{eventId}
 - [ ] Artist notifications (new follower, track milestone)
 - [ ] Shareable track links
 
-### **v1.1 - Payments (Week 12-16)** 🎯
+---
+
+## 💰 **M10: Payments Integration (Weeks 12-16)**
+
+**Goal:** Enable monetization with TrueLayer.
 
 **This is when monetization happens:**
 
@@ -331,9 +361,9 @@ artistEarnings/{artistId}
 - 5,000 streams
 - Positive feedback ("This is cleaner than SoundCloud!")
 
-**Decision Point:** If metrics look good → proceed to v1.1 (payments)
+**Decision Point:** If metrics look good → proceed to M10 (payments)
 
-### **v1.1 (With Payments)**
+### **M10 Success (With Payments)**
 
 **Month 6:**
 - 100 artists (50 UK/EU with paid tracks)
@@ -360,41 +390,48 @@ artistEarnings/{artistId}
 
 ## 📅 **Timeline Summary**
 
-| Phase | Duration | Deliverable |
-|-------|----------|-------------|
-| **Phase 0: Setup** | Week 1 | Firebase, schema, dev environment ready |
-| **Phase 1: Development** | Weeks 2-8 | Working web + Android app (free music) |
-| **Phase 2: Launch** | Week 9 | Live production deployment |
-| **Phase 3: Payments** | Weeks 12-16 | v1.1 with TrueLayer integration |
-| **Total to MVP** | **9 weeks** | **~2 months** |
-| **Total to monetization** | **16 weeks** | **~4 months** |
+| Milestone | Duration | Deliverable |
+|-----------|----------|-------------|
+| **M0** | Week 1 | Firebase, schema, dev environment ready |
+| **M1** | Week 2 | Authentication & navigation |
+| **M2** | Week 3 | Home feed & browse |
+| **M3** | Week 4 | Music player |
+| **M4** | Week 5 | Search & discovery |
+| **M5** | Week 6 | Artist upload |
+| **M6** | Week 7 | Playlists & library |
+| **M7** | Week 8 | Polish & testing |
+| **M8** | Week 9 | Production launch |
+| **M9** | Weeks 10-11 | Post-launch improvements |
+| **M10** | Weeks 12-16 | Payments integration |
+| **Total to MVP (M8)** | **9 weeks** | **~2 months** |
+| **Total to monetization (M10)** | **16 weeks** | **~4 months** |
 
 ---
 
 ## ✅ **Start Here (This Week)**
 
-**Phase 0 Checklist:**
+**M0 Checklist:**
 
-1. [ ] Set up Firebase project
+1. [x] Set up Firebase project
    - Enable Auth, Firestore, Storage, Hosting
    - Download config files
-   - Set budget alert
+   - Set budget alert (manual step via console)
 
-2. [ ] Install development tools
+2. [x] Install development tools
    - Flutter SDK
    - Android Studio
    - Firebase CLI
    - VS Code with Flutter extension
 
-3. [ ] Create database schema
+3. [x] Create database schema
    - Write `SCHEMA.md` with Firestore collections
    - Plan data structure
 
-4. [ ] Set up version control
+4. [x] Set up version control
    - Initialize Flutter project: `flutter create buddy_app`
    - First commit: "Initial Flutter project"
 
-5. [ ] Create basic project structure
+5. [x] Create basic project structure
    ```
    lib/
    ├── models/         (User, Artist, Track)
@@ -404,13 +441,13 @@ artistEarnings/{artistId}
    └── main.dart
    ```
 
-**Next Week (Phase 1 - Week 2):**
+**Next Week (M1 - Week 2):**
 6. [ ] Build authentication screens
 7. [ ] Implement Firebase Auth
 8. [ ] Create bottom navigation
 9. [ ] Test login/signup flow
 
-**Then:** Follow the weekly sprint plan!
+**Then:** Follow the milestone plan (M1 → M2 → M3 → ... → M8 launch!)!
 
 ---
 
@@ -425,7 +462,7 @@ artistEarnings/{artistId}
 * [Firestore Data Modeling](https://firebase.google.com/docs/firestore/data-model)
 * [Security Rules Guide](https://firebase.google.com/docs/firestore/security/get-started)
 
-**TrueLayer (for v1.1):**
+**TrueLayer (for M10):**
 * [TrueLayer Quick Start](https://docs.truelayer.com/)
 * [Payment Flow Guide](https://docs.truelayer.com/docs/single-immediate-payments)
 
@@ -433,11 +470,12 @@ artistEarnings/{artistId}
 
 ## 🚨 **Common Pitfalls to Avoid**
 
-1. **Don't overthink v1.0** - Keep it simple, launch fast
+1. **Don't overthink M0-M7** - Keep it simple, launch fast
 2. **Don't optimize prematurely** - Get it working first
-3. **Don't build payments in MVP** - Validate free music experience first
-4. **Don't skip testing** - Test on real devices, not just emulator
+3. **Don't build payments before M10** - Validate free music experience first (M0-M8)
+4. **Don't skip M7 testing** - Test on real devices, not just emulator
 5. **Don't hardcode secrets** - Use environment variables for API keys
+6. **Don't skip milestones** - Each builds on the previous one
 
 ---
 
@@ -445,10 +483,10 @@ artistEarnings/{artistId}
 
 * [DESIGN.md](./DESIGN.md) - Product design, features, visual identity
 * [BUSINESS_PLAN.md](./BUSINESS_PLAN.md) - Market analysis, financial model
-* [SCHEMA.md](./SCHEMA.md) - Database structure (create in Phase 0)
+* [SCHEMA.md](./SCHEMA.md) - Database structure (create in M0)
 
 ---
 
-**Ready to build? Start with Phase 0 this week! 🚀**
+**Ready to build? Start with M0 this week! 🚀**
 
 **Questions? Stuck? Check the Firebase docs or Flutter community on Discord.**
