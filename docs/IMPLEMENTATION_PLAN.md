@@ -213,21 +213,21 @@ streamEvents/{eventId}
 
 ---
 
-## 📚 **M6: Playlists & Library (Week 7)**
+## 📚 **M6: Playlists & Library (Week 7)** ✅
 
 **Goal:** Give users personal music organization.
 
 **User Library:**
-- [ ] Library tab shows user's playlists
-- [ ] "Create Playlist" button
-- [ ] Add tracks to playlist (from track menu)
-- [ ] Remove tracks from playlist
+- [x] Library tab shows user's playlists
+- [x] "Create Playlist" button
+- [x] Add tracks to playlist (from track menu)
+- [x] Remove tracks from playlist
 
 **Playlist Playback:**
-- [ ] Play entire playlist
-- [ ] Shuffle mode
-- [ ] Repeat mode (none/one/all)
-- [ ] Next/previous track in playlist context
+- [x] Play entire playlist
+- [x] Shuffle mode
+- [x] Repeat mode (none/one/all)
+- [x] Next/previous track in playlist context
 
 ---
 

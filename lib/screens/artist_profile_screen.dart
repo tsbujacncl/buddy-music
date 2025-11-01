@@ -6,6 +6,7 @@ import '../services/artist_service.dart';
 import '../services/track_service.dart';
 import '../services/audio_player_service.dart';
 import '../widgets/track_card.dart';
+import '../widgets/add_to_playlist_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ArtistProfileScreen extends StatefulWidget {
@@ -76,6 +77,39 @@ class _ArtistProfileScreenState extends State<ArtistProfileScreen> {
     } catch (e) {
       return null;
     }
+  }
+
+  void _showTrackOptions(TrackModel track) {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) => SafeArea(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ListTile(
+              leading: const Icon(Icons.play_arrow),
+              title: const Text('Play'),
+              onTap: () {
+                Navigator.of(context).pop();
+                final index = _tracks.indexOf(track);
+                if (index >= 0) {
+                  _audioService.playPlaylist(_tracks, index);
+                  _trackService.incrementStreamCount(track.trackId);
+                }
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.playlist_add),
+              title: const Text('Add to Playlist'),
+              onTap: () {
+                Navigator.of(context).pop();
+                AddToPlaylistDialog.show(context: context, track: track);
+              },
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   @override
@@ -281,6 +315,7 @@ class _ArtistProfileScreenState extends State<ArtistProfileScreen> {
                           _tracks[index].trackId,
                         );
                       },
+                      onMoreTap: () => _showTrackOptions(_tracks[index]),
                     );
                   },
                   childCount: _tracks.length,

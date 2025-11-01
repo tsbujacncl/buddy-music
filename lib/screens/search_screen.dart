@@ -4,6 +4,7 @@ import '../models/track_model.dart';
 import '../services/track_service.dart';
 import '../services/audio_player_service.dart';
 import '../widgets/track_card.dart';
+import '../widgets/add_to_playlist_dialog.dart';
 
 enum SortOption { newest, mostPlayed, alphabetical }
 
@@ -140,6 +141,39 @@ class _SearchScreenState extends State<SearchScreen> {
   void _onRecentSearchTap(String query) {
     _searchController.text = query;
     _performSearch(query);
+  }
+
+  void _showTrackOptions(TrackModel track) {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) => SafeArea(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ListTile(
+              leading: const Icon(Icons.play_arrow),
+              title: const Text('Play'),
+              onTap: () {
+                Navigator.of(context).pop();
+                final index = _searchResults.indexOf(track);
+                if (index >= 0) {
+                  _audioService.playPlaylist(_searchResults, index);
+                  _trackService.incrementStreamCount(track.trackId);
+                }
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.playlist_add),
+              title: const Text('Add to Playlist'),
+              onTap: () {
+                Navigator.of(context).pop();
+                AddToPlaylistDialog.show(context: context, track: track);
+              },
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   @override
@@ -341,6 +375,7 @@ class _SearchScreenState extends State<SearchScreen> {
                     _searchResults[index].trackId,
                   );
                 },
+                onMoreTap: () => _showTrackOptions(_searchResults[index]),
               );
             },
           ),

@@ -4,11 +4,13 @@ import '../models/track_model.dart';
 class TrackCard extends StatelessWidget {
   final TrackModel track;
   final VoidCallback? onTap;
+  final VoidCallback? onMoreTap;
 
   const TrackCard({
     super.key,
     required this.track,
     this.onTap,
+    this.onMoreTap,
   });
 
   @override
@@ -20,22 +22,47 @@ class TrackCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Artwork
-            AspectRatio(
-              aspectRatio: 1.0,
-              child: track.artworkUrl.isNotEmpty
-                  ? Image.network(
-                      track.artworkUrl,
-                      fit: BoxFit.cover,
-                      errorBuilder: (context, error, stackTrace) {
-                        return _buildPlaceholderArtwork();
-                      },
-                      loadingBuilder: (context, child, loadingProgress) {
-                        if (loadingProgress == null) return child;
-                        return _buildPlaceholderArtwork();
-                      },
-                    )
-                  : _buildPlaceholderArtwork(),
+            // Artwork with menu button
+            Stack(
+              children: [
+                AspectRatio(
+                  aspectRatio: 1.0,
+                  child: track.artworkUrl.isNotEmpty
+                      ? Image.network(
+                          track.artworkUrl,
+                          fit: BoxFit.cover,
+                          errorBuilder: (context, error, stackTrace) {
+                            return _buildPlaceholderArtwork();
+                          },
+                          loadingBuilder: (context, child, loadingProgress) {
+                            if (loadingProgress == null) return child;
+                            return _buildPlaceholderArtwork();
+                          },
+                        )
+                      : _buildPlaceholderArtwork(),
+                ),
+                if (onMoreTap != null)
+                  Positioned(
+                    top: 4,
+                    right: 4,
+                    child: Material(
+                      color: Colors.black.withValues(alpha: 0.5),
+                      borderRadius: BorderRadius.circular(20),
+                      child: InkWell(
+                        onTap: onMoreTap,
+                        borderRadius: BorderRadius.circular(20),
+                        child: const Padding(
+                          padding: EdgeInsets.all(4.0),
+                          child: Icon(
+                            Icons.more_vert,
+                            color: Colors.white,
+                            size: 20,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+              ],
             ),
 
             // Track info

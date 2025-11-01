@@ -8,6 +8,7 @@ import 'screens/login_screen.dart';
 import 'screens/signup_screen.dart';
 import 'screens/home_screen.dart';
 import 'screens/search_screen.dart';
+import 'screens/library_screen.dart';
 import 'screens/my_uploads_screen.dart';
 import 'widgets/mini_player.dart';
 
@@ -177,23 +178,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
   }
 }
 
-// Placeholder Screens - will be fully implemented in M5-M6
-
-class LibraryScreen extends StatelessWidget {
-  const LibraryScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Library'),
-      ),
-      body: const Center(
-        child: Text('Library Screen - Coming in M6'),
-      ),
-    );
-  }
-}
+// Placeholder Screens
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});

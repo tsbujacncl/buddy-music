@@ -3,6 +3,7 @@ import '../models/track_model.dart';
 import '../services/track_service.dart';
 import '../services/audio_player_service.dart';
 import '../widgets/track_card.dart';
+import '../widgets/add_to_playlist_dialog.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -140,6 +141,39 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
+  void _showTrackOptions(TrackModel track) {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) => SafeArea(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ListTile(
+              leading: const Icon(Icons.play_arrow),
+              title: const Text('Play'),
+              onTap: () {
+                Navigator.of(context).pop();
+                final index = _allTracks.indexOf(track);
+                if (index >= 0) {
+                  _audioService.playPlaylist(_allTracks, index);
+                  _trackService.incrementStreamCount(track.trackId);
+                }
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.playlist_add),
+              title: const Text('Add to Playlist'),
+              onTap: () {
+                Navigator.of(context).pop();
+                AddToPlaylistDialog.show(context: context, track: track);
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -210,6 +244,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   _allTracks[index].trackId,
                                 );
                               },
+                              onMoreTap: () => _showTrackOptions(_allTracks[index]),
                             );
                           },
                           childCount: _allTracks.length,
@@ -296,6 +331,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   _audioService.playPlaylist(tracks, index);
                   _trackService.incrementStreamCount(tracks[index].trackId);
                 },
+                onMoreTap: () => _showTrackOptions(tracks[index]),
               ),
             ),
           );
