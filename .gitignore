@@ -1,9 +1,8 @@
 # Business Plan (keep private)
 docs/BUSINESS_PLAN.md
 
-# Claude Code local settings (keep personal settings private)
-.claude/settings.local.json
-.claude/*.local.*
+# Claude Code (keep tool-specific config private)
+.claude/
 
 # Miscellaneous
 *.class
