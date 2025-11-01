@@ -132,22 +132,22 @@ streamEvents/{eventId}
 
 ---
 
-## 🏠 **M2: Home & Browse (Week 3)**
+## 🏠 **M2: Home & Browse (Week 3)** ✅
 
 **Goal:** Build the main content discovery interface.
 
 **Home Screen:**
-- [ ] Track feed (grid/list view)
-- [ ] Track cards (artwork, title, artist, duration)
-- [ ] "New Releases" section
-- [ ] "Trending" section (most played this week)
-- [ ] Genre filter chips
+- [x] Track feed (grid/list view)
+- [x] Track cards (artwork, title, artist, duration)
+- [x] "New Releases" section
+- [x] "Trending" section (most played this week)
+- [x] Genre filter chips
 
 **Data Loading:**
-- [ ] Create Dart models (User, Artist, Track)
-- [ ] Firestore service layer (read operations)
-- [ ] Load tracks with pagination (20 per page)
-- [ ] Pull-to-refresh
+- [x] Create Dart models (User, Artist, Track)
+- [x] Firestore service layer (read operations)
+- [x] Load tracks with pagination (20 per page)
+- [x] Pull-to-refresh
 
 ---
 
