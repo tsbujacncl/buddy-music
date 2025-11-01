@@ -170,21 +170,21 @@ streamEvents/{eventId}
 
 ---
 
-## 🔍 **M4: Search & Discovery (Week 5)**
+## 🔍 **M4: Search & Discovery (Week 5)** ✅
 
 **Goal:** Enable users to find music easily.
 
 **Search Implementation:**
-- [ ] Search bar on Search tab
-- [ ] Search by track title
-- [ ] Search by artist name
-- [ ] Search results view (instant results as you type)
-- [ ] Recent searches (local storage)
+- [x] Search bar on Search tab
+- [x] Search by track title
+- [x] Search by artist name
+- [x] Search results view (instant results as you type)
+- [x] Recent searches (local storage)
 
 **Browse Features:**
-- [ ] Genre filter (Electronic, Indie, Hip-Hop, Lo-Fi, etc.)
-- [ ] Sort options (Newest, Most Played, A-Z)
-- [ ] Artist discovery (browse artists, view artist pages)
+- [x] Genre filter (Electronic, Indie, Hip-Hop, Lo-Fi, etc.)
+- [x] Sort options (Newest, Most Played, A-Z)
+- [x] Artist discovery (browse artists, view artist pages)
 
 ---
 
