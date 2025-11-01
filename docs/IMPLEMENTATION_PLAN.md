@@ -188,28 +188,28 @@ streamEvents/{eventId}
 
 ---
 
-## 🎨 **M5: Artist Upload (Week 6)**
+## 🎨 **M5: Artist Upload (Week 6)** ✅
 
 **Goal:** Allow artists to upload their music.
 
 **Upload Flow:**
-- [ ] Upload screen (only visible to artists)
-- [ ] Audio file picker (MP3/WAV/FLAC)
-- [ ] Artwork image picker
-- [ ] Metadata form (title, genre)
-- [ ] Upload progress indicator
+- [x] Upload screen (only visible to artists)
+- [x] Audio file picker (MP3/WAV/FLAC)
+- [x] Artwork image picker
+- [x] Metadata form (title, genre)
+- [x] Upload progress indicator
 
 **Backend Processing:**
-- [ ] Upload audio to Firebase Storage
-- [ ] Upload artwork to Firebase Storage
-- [ ] Create Firestore track document
-- [ ] Show success message with link to track
+- [x] Upload audio to Firebase Storage
+- [x] Upload artwork to Firebase Storage
+- [x] Create Firestore track document
+- [x] Show success message with link to track
 
 **Artist Dashboard (Basic):**
-- [ ] "My Uploads" screen
-- [ ] Track list with stream counts
-- [ ] Total streams counter
-- [ ] Edit/delete track options
+- [x] "My Uploads" screen
+- [x] Track list with stream counts
+- [x] Total streams counter
+- [x] Edit/delete track options
 
 ---
 

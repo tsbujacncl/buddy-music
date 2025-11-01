@@ -8,6 +8,7 @@ import 'screens/login_screen.dart';
 import 'screens/signup_screen.dart';
 import 'screens/home_screen.dart';
 import 'screens/search_screen.dart';
+import 'screens/my_uploads_screen.dart';
 import 'widgets/mini_player.dart';
 
 void main() async {
@@ -365,11 +366,15 @@ class ProfileScreen extends StatelessWidget {
                 ),
                 ListTile(
                   leading: const Icon(Icons.upload),
-                  title: const Text('Upload Music'),
-                  subtitle: const Text('Share your tracks with the world'),
+                  title: const Text('My Uploads'),
+                  subtitle: const Text('Manage your tracks'),
                   trailing: const Icon(Icons.chevron_right),
                   onTap: () {
-                    // Navigate to upload (M5)
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const MyUploadsScreen(),
+                      ),
+                    );
                   },
                 ),
                 ListTile(
